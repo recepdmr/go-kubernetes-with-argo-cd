@@ -9,7 +9,7 @@ import (
 
 func main() {
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("hi from new version"))
+		w.Write([]byte("hi from new version 2 version"))
 	})
 
 	port := fmt.Sprintf(":%s", os.Getenv("PORT"))
