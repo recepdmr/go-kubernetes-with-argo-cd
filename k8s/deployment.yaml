@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: simple-go-app
-        image: developerrd/simple-go-app:5a257c1cf06da1cffb9eefa5ea453f06d5491490
+        image: developerrd/simple-go-app:bb9e0097cd63e933f683b9bdc43efaf1cf579de7
         resources:
           limits:
             memory: "128Mi"
