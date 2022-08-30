@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+  
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: login docker hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{secrets.DOCKER_HUB_USERNAME}}
+          password: ${{secrets.DOCKER_HUB_TOKEN}}
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          tags: developerrd/simple-go-app:${{github.sha}}
+      - name: Change deployment version
+        uses: actions/checkout@v2
+        run: |
+          perl -i -pe 's/developerrd/simple-go-app:.*/developerrd/simple-go-app:${{ github.sha }}/g' argocd/deployment.yaml
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add argocd/deployment.yaml
+          git commit -m "generated"
+          git push
