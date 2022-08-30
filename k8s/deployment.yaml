@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-go-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simple-go-app
+  template:
+    metadata:
+      labels:
+        app: simple-go-app
+    spec:
+      containers:
+      - name: simple-go-app
+        image: developerrd/simple-go-app
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 3000
+        envFrom:
+          - configMapRef:
+              name: simple-go-app-configmap
