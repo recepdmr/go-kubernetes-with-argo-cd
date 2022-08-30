@@ -23,6 +23,6 @@ jobs:
           perl -i -pe 's/simple-go-app:.*/simple-go-app:${{ github.sha }}/g' k8s/deployment.yaml
           git config user.name github-actions
           git config user.email github-actions@github.com
-          git add argocd/deployment.yaml
+          git add k8s/deployment.yaml
           git commit -m "generated"
           git push
