@@ -20,7 +20,7 @@ jobs:
           tags: developerrd/simple-go-app:${{github.sha}}
       - uses: actions/checkout@v2
       - run: |
-          perl -i -pe 's/developerrd/simple-go-app:.*/developerrd/simple-go-app:${{ github.sha }}/g' k8s/deployment.yaml
+          perl -i -pe 's/developerrd/simple-go-app.*/developerrd/simple-go-app:${{ github.sha }}/g' k8s/deployment.yaml
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add argocd/deployment.yaml
